@@ -1,6 +1,8 @@
-using Microsoft.AspNetCore.Builder;
+using RealEstate.Application.Services;
+using RealEstate.Domain.Interfaces;
 using RealEstate.Infrastructure.Data;
 using RealEstate.Infrastructure.Extensions;
+using RealEstate.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 
 builder.Services.AddSingleton<MongoDbContext>();
+
+// Repository Registration
+builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
+builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
+builder.Services.AddScoped<IPropertyImageRepository, PropertyImageRepository>();
+builder.Services.AddScoped<IPropertyTraceRepository, PropertyTraceRepository>();
+
+// Service Registration
+builder.Services.AddScoped<IOwnerService, OwnerService>();
+builder.Services.AddScoped<IPropertyService, PropertyService>();
 
 // CORS
 builder.Services.AddCors(options =>
