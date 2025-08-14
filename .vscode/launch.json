@@ -1,0 +1,55 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // --- Configuración para lanzar una aplicación web ASP.NET Core ---
+      "name": ".NET Launch (web)",
+      "type": "coreclr",
+      "request": "launch",
+      // Tarea que se ejecuta ANTES de lanzar. 'build' compila el proyecto.
+      // Esto requiere un archivo tasks.json configurado (ver más abajo).
+      "preLaunchTask": "build",
+      // Ruta al DLL de tu proyecto web.
+      // Asegúrate que la versión de .NET (net8.0) y el nombre del DLL son correctos.
+      "program": "${workspaceFolder}/RealEstate.Api/bin/Debug/net9.0/RealEstate.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/RealEstate.Api",
+      "stopAtEntry": false,
+      // Variables de entorno. Esencial para que ASP.NET Core se ejecute en modo desarrollo.
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      },
+      // Acción para cuando el servidor esté listo: abre un navegador automáticamente.
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      }
+    },
+    {
+      // --- Configuración para lanzar una aplicación de consola ---
+      "name": ".NET Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      // Ruta al DLL de tu aplicación de consola.
+      "program": "${workspaceFolder}/RealEstate.Api/bin/Debug/net9.0/RealEstate.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/RealEstate.Api",
+      // 'internalConsole' abre la consola de depuración de VS Code.
+      // 'integratedTerminal' usa la terminal integrada de VS Code.
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
+      // --- Configuración para adjuntar el depurador a un proceso .NET ya en ejecución ---
+      "name": ".NET Attach",
+      "type": "coreclr",
+      "request": "attach",
+      // Muestra una lista para que elijas el proceso al que te quieres conectar.
+      "processId": "${command:pickProcess}"
+    }
+  ]
+}
